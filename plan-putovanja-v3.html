@@ -292,28 +292,43 @@
   section.spa-day.day-current { display: block !important; }
   .sep { display: none; }
 
-  /* ===== DAY BACKGROUNDS ===== */
-  section.spa-day { transition: opacity 0.3s ease; }
-  section.spa-day.day-slide-out { opacity: 0; }
-  .day-bg-1  { background: rgba(208,80,48,0.04); }
-  .day-bg-2  { background: rgba(210,82,44,0.06); }
-  .day-bg-3  { background: rgba(214,84,40,0.08); }
-  .day-bg-4  { background: rgba(218,86,36,0.10); }
-  .day-bg-5  { background: rgba(222,90,32,0.10); }
-  .day-bg-6  { background: rgba(224,100,30,0.10); }
-  .day-bg-7  { background: rgba(224,110,28,0.10); }
-  .day-bg-8  { background: rgba(200,122,24,0.10); }
-  .day-bg-9  { background: rgba(150,130,50,0.08); }
-  .day-bg-10 { background: rgba(100,140,80,0.08); }
-  .day-bg-11 { background: rgba(70,140,110,0.08); }
-  .day-bg-12 { background: rgba(50,138,130,0.08); }
-  .day-bg-13 { background: rgba(42,138,150,0.08); }
-  .day-bg-14 { background: rgba(42,138,156,0.10); }
+  /* ===== SLIDE ANIMATION ===== */
+  section.spa-day.day-current { animation: daySlideIn 0.35s ease-out; }
+  section.spa-day.day-slide-left { animation: daySlideOutLeft 0.25s ease-in forwards; }
+  section.spa-day.day-slide-right { animation: daySlideOutRight 0.25s ease-in forwards; }
+  @keyframes daySlideIn { from { opacity: 0; transform: translateX(0); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes daySlideOutLeft { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-60px); } }
+  @keyframes daySlideOutRight { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(60px); } }
+
+  /* ===== DAY CARD BACKGROUNDS (summer gradient) ===== */
+  .day-bg-1  .day-card { background: linear-gradient(180deg, #fef3ec 0%, #fde8da 100%); }
+  .day-bg-2  .day-card { background: linear-gradient(180deg, #fef0e6 0%, #fce0c8 100%); }
+  .day-bg-3  .day-card { background: linear-gradient(180deg, #fdf2e4 0%, #fbe3c0 100%); }
+  .day-bg-4  .day-card { background: linear-gradient(180deg, #fdf5e0 0%, #f8e6b8 100%); }
+  .day-bg-5  .day-card { background: linear-gradient(180deg, #fcf7de 0%, #f4eab2 100%); }
+  .day-bg-6  .day-card { background: linear-gradient(180deg, #f5f8e0 0%, #e8eebc 100%); }
+  .day-bg-7  .day-card { background: linear-gradient(180deg, #eef8e4 0%, #d8ecc4 100%); }
+  .day-bg-8  .day-card { background: linear-gradient(180deg, #e8f6e8 0%, #c8e8cc 100%); }
+  .day-bg-9  .day-card { background: linear-gradient(180deg, #e4f5ed 0%, #bbe6d8 100%); }
+  .day-bg-10 .day-card { background: linear-gradient(180deg, #e0f4f2 0%, #b0e0db 100%); }
+  .day-bg-11 .day-card { background: linear-gradient(180deg, #def2f4 0%, #a8dce4 100%); }
+  .day-bg-12 .day-card { background: linear-gradient(180deg, #dcf0f5 0%, #a0d8e8 100%); }
+  .day-bg-13 .day-card { background: linear-gradient(180deg, #daeef6 0%, #98d4ea 100%); }
+  .day-bg-14 .day-card { background: linear-gradient(180deg, #d8ecf4 0%, #90d0e4 100%); }
 
   /* ===== SWIPE HINT ===== */
-  .swipe-hint { text-align: center; padding: 1rem; color: var(--text-dim); font-size: 0.8rem; font-weight: 500; opacity: 0.7; }
-  .swipe-hint span { display: inline-block; animation: swipeNudge 2s ease-in-out infinite; }
+  .swipe-hint { text-align: center; padding: 1.2rem; color: var(--text-dim); font-size: 0.8rem; font-weight: 500; opacity: 0.6; }
+  .swipe-hint span { display: inline-block; animation: swipeNudge 2.5s ease-in-out infinite; }
   @keyframes swipeNudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-8px); } }
+
+  /* ===== PHOTO FULLSCREEN LIGHTBOX ===== */
+  .photo-lightbox { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999; background: rgba(0,0,0,0.92); display: flex; align-items: center; justify-content: center; cursor: zoom-out; animation: lbFadeIn 0.25s ease; }
+  .photo-lightbox img { max-width: 100vw; max-height: 100vh; object-fit: contain; }
+  .photo-lightbox-close { position: absolute; top: 12px; right: 16px; color: #fff; font-size: 2rem; cursor: pointer; background: rgba(0,0,0,0.4); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none; }
+  @keyframes lbFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ===== DAY PHOTOS — LARGER, TAPPABLE ===== */
+  .day-photo { cursor: zoom-in; }
 
   .nav { position: sticky; top: 0; z-index: 100; background: rgba(243, 232, 220, 0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 0; transition: transform 0.3s ease; }
   .nav.nav-hidden { transform: translateY(-100%); }
@@ -333,12 +348,18 @@
   .nav a:hover { color: var(--accent); background: rgba(208,80,48,0.08); text-decoration: none; }
   .nav a.nav-active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(208,80,48,0.12); }
 
-  .nav-days { display: none; background: var(--surface); border-top: 1px solid rgba(0,0,0,0.06); padding: 0.4rem 0.8rem; align-items: center; justify-content: center; gap: 0.6rem; }
+  .nav-days { display: none; background: var(--surface); border-top: 1px solid rgba(0,0,0,0.06); padding: 0.5rem 1rem; flex-direction: column; align-items: center; gap: 0.3rem; }
   .nav-days.nav-days-visible { display: flex; }
-  .nav-day-select { appearance: none; -webkit-appearance: none; background: var(--surface2); color: var(--text); font-family: 'Quicksand', sans-serif; font-size: 0.9rem; font-weight: 700; padding: 0.5rem 2.2rem 0.5rem 1rem; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 10px; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a4838' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.7rem center; min-height: 44px; transition: border-color 0.2s; }
-  .nav-day-select:focus { outline: none; border-color: var(--accent); }
-  .nav-day-back { padding: 0.5rem 0.8rem; border-radius: 10px; background: rgba(42,138,156,0.08); color: var(--accent2); font-size: 0.8rem; font-weight: 600; text-decoration: none; white-space: nowrap; min-height: 44px; display: flex; align-items: center; font-family: 'Quicksand', sans-serif; transition: background 0.2s; }
-  .nav-day-back:hover { background: rgba(42,138,156,0.15); text-decoration: none; }
+  .nav-day-select { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+  .nav-day-label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.3rem 0.6rem; border-radius: 8px; transition: background 0.2s; -webkit-tap-highlight-color: transparent; }
+  .nav-day-label:active { background: rgba(208,80,48,0.08); }
+  .nav-day-num { font-family: 'Baloo 2', cursive; font-size: 1.3rem; font-weight: 800; color: var(--accent); line-height: 1; }
+  .nav-day-name { font-family: 'Quicksand', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--text); }
+  .nav-day-tap { font-size: 0.65rem; color: var(--text-dim); font-weight: 500; }
+  .nav-day-dots { display: flex; gap: 4px; align-items: center; }
+  .nav-day-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--surface2); transition: all 0.3s; }
+  .nav-day-dot.dot-active { width: 18px; border-radius: 3px; background: var(--accent); }
+  .nav-day-dot.dot-past { background: rgba(208,80,48,0.3); }
 
   .day-sep { height: 2px; background: linear-gradient(to right, transparent, var(--surface2), transparent); margin: 1rem 0 2rem; }
 
@@ -455,7 +476,7 @@
   @media (max-width: 700px) { .miss-grid { grid-template-columns: 1fr; } }
 
   /* ===== DAY PHOTOS ===== */
-  .day-photo { width: 100%; height: auto; object-fit: contain; display: block; border-bottom: 3px solid var(--accent); border-radius: 0; }
+  .day-photo { width: 100%; height: auto; max-height: 50vh; object-fit: cover; display: block; border-bottom: 3px solid var(--accent); border-radius: 0; cursor: zoom-in; }
   .day-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin: 1.5rem 0; border-radius: 12px; overflow: hidden; }
   .day-gallery img { width: 100%; height: 220px; object-fit: cover; display: block; transition: transform 0.3s; }
   .day-gallery img:hover { transform: scale(1.03); }
@@ -501,7 +522,7 @@
     <img src="logo.jpg" alt="ManuMila logo" class="brand-logo brand-logo-hero">
     <div class="hero-badge">Avanture kamperom ManuMila &middot; Ljeto 2026</div>
     <h1>Dolomiti &amp; Alpska Jezera</h1>
-    <p class="hero-subtitle">14 dana kamperom kroz najljepše krajeve Europe.<br>Provjereni podaci. Realne cijene. Plan skrojen za obitelj.</p>
+    <p class="hero-subtitle">14 dana kamperom kroz najljepše krajeve Europe.<br>Za obitelj s dvoje djece (12 i 7 god). Provjereni podaci. Realne cijene.</p>
     <div class="hero-stats">
       <div class="hero-stat"><span class="hero-stat-value">14</span><span class="hero-stat-label">Dana</span></div>
       <div class="hero-stat"><span class="hero-stat-value">6</span><span class="hero-stat-label">Baza</span></div>
@@ -531,6 +552,14 @@
     <a href="#savjeti" data-nav="savjeti">Savjeti</a>
   </div>
   <div class="nav-days" id="nav-days">
+    <div class="nav-day-label" id="nav-day-label">
+      <span class="nav-day-num" id="nav-day-num">01</span>
+      <div>
+        <span class="nav-day-name" id="nav-day-name">Faaker See</span>
+        <span class="nav-day-tap">tapni za odabir</span>
+      </div>
+    </div>
+    <div class="nav-day-dots" id="nav-day-dots"></div>
     <select class="nav-day-select" id="day-select">
       <option value="dan1">Dan 1 — Faaker See</option>
       <option value="dan2">Dan 2 — Sesto</option>
@@ -547,7 +576,6 @@
       <option value="dan13">Dan 13 — Forest Park</option>
       <option value="dan14">Dan 14 — Povratak</option>
     </select>
-    <a href="#karta" class="nav-day-back" data-goto="karta">&#9664; Karta</a>
   </div>
 </nav>
 
@@ -3312,9 +3340,15 @@
 
   var navDays = document.getElementById('nav-days');
   var daySelect = document.getElementById('day-select');
+  var dayNumEl = document.getElementById('nav-day-num');
+  var dayNameEl = document.getElementById('nav-day-name');
+  var dayDotsEl = document.getElementById('nav-day-dots');
+  var dayLabelEl = document.getElementById('nav-day-label');
   var sectionLinks = document.querySelectorAll('#nav-sections a[data-nav]');
   var isInDaysMode = false;
   var currentDayId = 'dan1';
+
+  var dayNames = ['Faaker See','Sesto','Val Fiscalina','Acquafun','Braies → Siusi','E-bike Siusi','Seceda','Lago di Caldaro','SUP + vino','Carezza → Fassa','Ciampedie','Molveno','Forest Park','Povratak'];
 
   // Apply background classes to day sections
   days.forEach(function(dayId, i) {
@@ -3322,22 +3356,69 @@
     if (el) el.classList.add('day-bg-' + (i + 1));
   });
 
-  function showDay(dayId, animate) {
+  // Build progress dots
+  if (dayDotsEl) {
+    for (var d = 0; d < 14; d++) {
+      var dot = document.createElement('span');
+      dot.className = 'nav-day-dot';
+      dayDotsEl.appendChild(dot);
+    }
+  }
+
+  // Tap label to open native select picker
+  if (dayLabelEl && daySelect) {
+    dayLabelEl.addEventListener('click', function() {
+      daySelect.focus();
+      if (typeof daySelect.showPicker === 'function') {
+        try { daySelect.showPicker(); } catch(e) {}
+      } else {
+        var ev = document.createEvent('MouseEvents');
+        ev.initEvent('mousedown', true, true);
+        daySelect.dispatchEvent(ev);
+      }
+    });
+  }
+
+  function updateDayIndicator(dayId) {
     var idx = days.indexOf(dayId);
     if (idx < 0) return;
+    if (dayNumEl) dayNumEl.textContent = String(idx + 1).padStart(2, '0');
+    if (dayNameEl) dayNameEl.textContent = dayNames[idx] || '';
+    if (daySelect) daySelect.value = dayId;
+    if (dayDotsEl) {
+      var dots = dayDotsEl.children;
+      for (var i = 0; i < dots.length; i++) {
+        dots[i].className = 'nav-day-dot' + (i === idx ? ' dot-active' : (i < idx ? ' dot-past' : ''));
+      }
+    }
+  }
 
-    days.forEach(function(d) {
-      var el = document.getElementById(d);
-      if (el) el.classList.remove('day-current', 'day-slide-out');
-    });
+  function showDay(dayId, direction) {
+    var idx = days.indexOf(dayId);
+    if (idx < 0) return;
+    var oldId = currentDayId;
+    var oldEl = document.getElementById(oldId);
 
-    var target = document.getElementById(dayId);
-    if (target) {
-      target.classList.add('day-current');
+    if (direction && oldEl && oldId !== dayId) {
+      var slideClass = direction === 'left' ? 'day-slide-left' : 'day-slide-right';
+      oldEl.classList.add(slideClass);
+      setTimeout(function() {
+        oldEl.classList.remove('day-current', 'day-slide-left', 'day-slide-right');
+        var target = document.getElementById(dayId);
+        if (target) target.classList.add('day-current');
+        window.scrollTo(0, 0);
+      }, 250);
+    } else {
+      days.forEach(function(d) {
+        var el = document.getElementById(d);
+        if (el) el.classList.remove('day-current', 'day-slide-left', 'day-slide-right');
+      });
+      var target = document.getElementById(dayId);
+      if (target) target.classList.add('day-current');
+      window.scrollTo(0, 0);
     }
     currentDayId = dayId;
-    if (daySelect) daySelect.value = dayId;
-    window.scrollTo(0, 0);
+    updateDayIndicator(dayId);
   }
 
   function showPage(id, scrollToDay) {
@@ -3445,12 +3526,29 @@
 
     var targetId = days[targetIdx];
     history.pushState(null, null, '#' + targetId);
-    showDay(targetId, true);
+    showDay(targetId, dx < 0 ? 'left' : 'right');
   }, { passive: true });
 
   // Initial page
   var initHash = location.hash.slice(1) || 'top';
   showPage(initHash, 'instant');
+
+  // --- PHOTO LIGHTBOX ---
+  document.addEventListener('click', function(e) {
+    var img = e.target.closest('.day-photo, .section-photo, .miss-photo');
+    if (!img) return;
+    e.preventDefault();
+    var lb = document.createElement('div');
+    lb.className = 'photo-lightbox';
+    var src = img.src.replace(/w=\d+/, 'w=1600').replace(/h=\d+/, 'h=1200');
+    lb.innerHTML = '<button class="photo-lightbox-close">&times;</button><img src="' + src + '" alt="' + (img.alt || '') + '">';
+    document.body.appendChild(lb);
+    document.body.style.overflow = 'hidden';
+    lb.addEventListener('click', function() {
+      lb.remove();
+      document.body.style.overflow = '';
+    });
+  });
 })();
 
 // ==================== LEAFLET MAP ====================
