@@ -284,7 +284,9 @@
 
   .nav { position: sticky; top: 0; z-index: 100; background: rgba(243, 232, 220, 0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 0; transition: transform 0.3s ease; }
   .nav.nav-hidden { transform: translateY(-100%); }
-  .nav-sections { display: flex; gap: 0; max-width: 1400px; margin: 0 auto; overflow-x: auto; scrollbar-width: none; }
+  .nav-sections { display: flex; gap: 0; max-width: 1400px; margin: 0 auto; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%); mask-image: linear-gradient(to right, black 85%, transparent 100%); }
+  .nav-sections.nav-scrolled-end { -webkit-mask-image: linear-gradient(to left, black 85%, transparent 100%); mask-image: linear-gradient(to left, black 85%, transparent 100%); }
+  .nav-sections.nav-scrolled-mid { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 85%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 85%, transparent 100%); }
   .nav-sections::-webkit-scrollbar { display: none; }
   .nav a { color: var(--text-dim); text-decoration: none; padding: 0.75rem 0.8rem; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; flex-shrink: 0; border-bottom: 2px solid transparent; white-space: nowrap; font-family: 'Quicksand', sans-serif; }
   .nav a:hover { color: var(--accent); background: rgba(208,80,48,0.08); text-decoration: none; }
@@ -3490,6 +3492,28 @@
 
 // ==================== V3 UX IMPROVEMENTS ====================
 (function() {
+  // --- 0. NAV SCROLL FADE HINT ---
+  var navSections = document.getElementById('nav-sections');
+  if (navSections) {
+    function updateNavFade() {
+      var sl = navSections.scrollLeft;
+      var maxScroll = navSections.scrollWidth - navSections.clientWidth;
+      if (maxScroll <= 2) {
+        navSections.classList.remove('nav-scrolled-end', 'nav-scrolled-mid');
+      } else if (sl <= 5) {
+        navSections.classList.remove('nav-scrolled-end', 'nav-scrolled-mid');
+      } else if (sl >= maxScroll - 5) {
+        navSections.classList.add('nav-scrolled-end');
+        navSections.classList.remove('nav-scrolled-mid');
+      } else {
+        navSections.classList.add('nav-scrolled-mid');
+        navSections.classList.remove('nav-scrolled-end');
+      }
+    }
+    navSections.addEventListener('scroll', updateNavFade);
+    updateNavFade();
+  }
+
   // --- 1. COLLAPSIBLE TIMELINE ---
   var allTimelineItems = document.querySelectorAll('.timeline-item');
   allTimelineItems.forEach(function(item) {
