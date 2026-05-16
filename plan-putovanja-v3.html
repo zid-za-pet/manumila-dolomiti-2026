@@ -27,7 +27,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Quicksand', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; font-size: 17px; }
+  body { font-family: 'Quicksand', sans-serif; background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%); background-attachment: fixed; color: var(--text); line-height: 1.8; font-size: 17px; min-height: 100vh; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
@@ -80,7 +80,7 @@
   .nav a { color: var(--text-dim); text-decoration: none; padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 500; transition: all 0.2s; flex-shrink: 0; }
   .nav a:hover { background: var(--surface2); color: var(--accent); }
 
-  .section { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; }
+  .section { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; background: var(--bg); border-radius: 20px; margin-top: 1rem; margin-bottom: 1rem; box-shadow: 0 4px 30px rgba(0,0,0,0.2); }
   .section-header { margin-bottom: 3rem; }
   .section-header h2 { font-family: 'Baloo 2', cursive; font-size: 2.2rem; margin-bottom: 0.5rem; font-weight: 800; -webkit-text-stroke: 0.5px rgba(0,0,0,0.06); text-shadow: 1px 1px 0 rgba(0,0,0,0.04); }
   .section-header .subtitle { color: var(--text-dim); font-size: 1.1rem; }
@@ -254,7 +254,7 @@
   .mi-milestone { display: flex; align-items: center; gap: 1rem; padding: 0.5rem 0; font-size: 0.95rem; color: var(--text-dim); }
   .mi-milestone-icon { font-size: 1.5rem; flex-shrink: 0; }
 
-  .footer { text-align: center; padding: 2rem 1.5rem; color: var(--text-dim); font-size: 0.9rem; border-top: 1px solid var(--surface2); }
+  .footer { text-align: center; padding: 2rem 1.5rem; color: rgba(255,255,255,0.5); font-size: 0.9rem; }
   .footer-disclaimer { background: rgba(243,156,18,0.08); border: 1px solid rgba(243,156,18,0.25); border-radius: 10px; padding: 1rem 1.2rem; margin: 0 auto 1.5rem; max-width: 600px; text-align: left; }
   .footer-disclaimer strong { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #b87008; margin-bottom: 0.3rem; }
   .footer-disclaimer p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; margin: 0; }
@@ -361,15 +361,15 @@
   /* ===== DAY PHOTOS — LARGER, TAPPABLE ===== */
   .day-photo { cursor: zoom-in; }
 
-  .nav { position: sticky; top: 0; z-index: 100; background: rgba(243, 232, 220, 0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 0; transition: transform 0.3s ease; }
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(250, 245, 239, 0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 0; transition: transform 0.3s ease; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
   .nav.nav-hidden { transform: translateY(-100%); }
   .nav-sections { display: flex; gap: 0; max-width: 1400px; margin: 0 auto; overflow-x: auto; scrollbar-width: none; -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%); mask-image: linear-gradient(to right, black 85%, transparent 100%); }
   .nav-sections.nav-scrolled-end { -webkit-mask-image: linear-gradient(to left, black 85%, transparent 100%); mask-image: linear-gradient(to left, black 85%, transparent 100%); }
   .nav-sections.nav-scrolled-mid { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 85%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 85%, transparent 100%); }
   .nav-sections::-webkit-scrollbar { display: none; }
   .nav-scroll-hint { position: absolute; top: 0; bottom: 0; width: 32px; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 5; font-size: 1rem; color: var(--accent); opacity: 0; transition: opacity 0.3s; }
-  .nav-scroll-hint-right { right: 0; background: linear-gradient(to left, var(--bg) 30%, transparent 100%); }
-  .nav-scroll-hint-left { left: 0; background: linear-gradient(to right, var(--bg) 30%, transparent 100%); }
+  .nav-scroll-hint-right { right: 0; background: linear-gradient(to left, rgba(250,245,239,1) 30%, transparent 100%); }
+  .nav-scroll-hint-left { left: 0; background: linear-gradient(to right, rgba(250,245,239,1) 30%, transparent 100%); }
   .nav-scroll-hint.visible { opacity: 1; }
   .nav-scroll-hint span { animation: nudge 1.5s ease-in-out infinite; display: block; }
   .nav-scroll-hint-left span { animation-name: nudgeLeft; }
