@@ -495,8 +495,8 @@
     <a href="#top" data-nav="top">Home</a>
     <a href="#pregled" data-nav="pregled">Pregled</a>
     <a href="#dan1" data-nav="dani" class="nav-dani-trigger">Dani</a>
-    <a href="#aktivnosti" data-nav="aktivnosti">Aktivnosti</a>
     <a href="#karta" data-nav="karta">Karta</a>
+    <a href="#aktivnosti" data-nav="aktivnosti">Aktivnosti</a>
     <a href="#ruta" data-nav="ruta">Ruta</a>
     <a href="#propustamo" data-nav="propustamo">Propuštamo?</a>
     <a href="#legende" data-nav="legende">Legende</a>
@@ -3321,11 +3321,17 @@
       a.classList.toggle('day-active', a.getAttribute('data-day') === dayId);
     });
     setTimeout(function() {
-      var activeLink = navDays ? navDays.querySelector('.day-active') : null;
+      if (!navDays) return;
+      var activeLink = navDays.querySelector('.day-active');
       if (activeLink) {
-        activeLink.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+        var pillLeft = activeLink.offsetLeft;
+        var pillWidth = activeLink.offsetWidth;
+        var navWidth = navDays.clientWidth;
+        navDays.scrollLeft = pillLeft - (navWidth / 2) + (pillWidth / 2);
+      } else {
+        navDays.scrollLeft = 0;
       }
-    }, 80);
+    }, 120);
   }
 
   // Scroll-spy: highlight current day while scrolling
@@ -3379,7 +3385,14 @@
     }
   });
 
+  var lastPushTime = 0;
+  var origPushState = history.pushState.bind(history);
+  history.pushState = function() {
+    lastPushTime = Date.now();
+    return origPushState.apply(null, arguments);
+  };
   window.addEventListener('hashchange', function() {
+    if (Date.now() - lastPushTime < 200) return;
     showPage(location.hash.slice(1) || 'top');
   });
   window.addEventListener('popstate', function() {
