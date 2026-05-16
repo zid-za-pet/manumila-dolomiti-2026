@@ -31,10 +31,10 @@
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; background: linear-gradient(135deg, #d05030 0%, #e07a18 50%, #2a8a9c 100%); position: relative; overflow: hidden; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%); position: relative; overflow: hidden; }
   .hero-landing { min-height: auto; padding: 0; }
   .hero-landing .hero-content { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; }
-  .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(224,122,24,0.15) 0%, transparent 50%); pointer-events: none; }
+  .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 30% 20%, rgba(224,122,24,0.15) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(42,138,156,0.1) 0%, transparent 50%); pointer-events: none; }
   .hero-content { position: relative; z-index: 1; max-width: 800px; width: 100%; text-align: center; margin: 0 auto; }
   .hero-scroll-hint { font-size: 1.5rem; color: rgba(255,255,255,0.5); animation: scrollBounce 2s ease-in-out infinite; margin-top: 1rem; }
   @keyframes scrollBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
@@ -44,7 +44,7 @@
   .landing-title { font-family: 'Baloo 2', cursive; font-size: 1.8rem; color: #fff; margin-bottom: 1.5rem; text-align: center; text-shadow: 1px 1px 0 rgba(0,0,0,0.1); }
   .landing-text { color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.8; text-align: center; margin-bottom: 2rem; }
   .landing-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-  .landing-feat { display: flex; gap: 0.7rem; align-items: flex-start; background: rgba(255,255,255,0.12); border-radius: 12px; padding: 1rem; backdrop-filter: blur(10px); }
+  .landing-feat { display: flex; gap: 0.7rem; align-items: flex-start; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; backdrop-filter: blur(10px); }
   .landing-feat-icon { font-size: 1.2rem; color: #fff; flex-shrink: 0; }
   .landing-feat div { color: rgba(255,255,255,0.9); font-size: 0.9rem; line-height: 1.5; }
   .landing-feat strong { color: #fff; display: block; margin-bottom: 0.15rem; }
@@ -57,8 +57,8 @@
   @media (max-width: 400px) { .landing-gallery { grid-template-columns: 1fr; } .landing-photo-card img { height: 200px; } }
 
   .landing-benefits { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2.5rem; }
-  .landing-benefit { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.95); padding: 0.8rem 1.2rem; border-radius: 10px; font-size: 0.95rem; font-weight: 500; backdrop-filter: blur(10px); }
-  .landing-benefit::before { content: '✓ '; color: rgba(255,255,255,0.7); font-weight: 700; }
+  .landing-benefit { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.9); padding: 0.8rem 1.2rem; border-radius: 10px; font-size: 0.95rem; font-weight: 500; }
+  .landing-benefit::before { content: '✓ '; color: #e8860b; font-weight: 700; }
   .landing-cta { font-size: 1.15rem; padding: 1.1rem 3.5rem; margin-bottom: 2rem; }
   .landing-brand { color: rgba(255,255,255,0.4); font-size: 0.8rem; text-align: center; }
   .landing-final { text-align: center; padding-bottom: 3rem; }
@@ -72,8 +72,8 @@
   .hero-stat { text-align: center; }
   .hero-stat-value { font-size: 2.8rem; font-weight: 800; color: #fff; display: block; font-family: 'Baloo 2', cursive; -webkit-text-stroke: 1px rgba(0,0,0,0.08); text-shadow: 2px 2px 0 rgba(0,0,0,0.12); }
   .hero-stat-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.85); font-weight: 600; }
-  .hero-cta { display: inline-block; background: #fff; color: var(--accent); padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.3s, box-shadow 0.3s; font-family: 'Quicksand', sans-serif; }
-  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(208,80,48,0.35); text-decoration: none; }
+  .hero-cta { display: inline-block; background: linear-gradient(135deg, #e8860b, #d05030); color: #fff; padding: 1rem 3rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1rem; transition: transform 0.3s, box-shadow 0.3s; font-family: 'Quicksand', sans-serif; }
+  .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(232,134,11,0.4); text-decoration: none; color: #fff; }
 
   .nav { position: sticky; top: 0; z-index: 100; background: rgba(243, 232, 220, 0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.06); overflow-x: auto; white-space: nowrap; padding: 0.5rem 1rem; }
   .nav-inner { display: flex; gap: 0.25rem; max-width: 1200px; margin: 0 auto; }
@@ -508,10 +508,8 @@
 
   /* ===== DAY PHOTOS ===== */
   .day-photo { width: 100%; height: auto; max-height: 50vh; object-fit: cover; display: block; border-bottom: 3px solid var(--accent); border-radius: 0; cursor: zoom-in; }
-  .day-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin: 1.5rem 0; border-radius: 12px; overflow: hidden; }
-  .day-gallery img { width: 100%; height: 220px; object-fit: cover; display: block; transition: transform 0.3s; }
-  .day-gallery img:hover { transform: scale(1.03); }
-  @media (max-width: 600px) { .day-gallery img { height: 160px; } }
+  .day-gallery { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
+  .day-gallery img { width: 100%; height: auto; max-height: 45vh; object-fit: cover; display: block; border-radius: 12px; cursor: zoom-in; }
 
   /* ===== DAY INTRO ===== */
   .day-intro { padding: 1.2rem 1.5rem; font-size: 0.95rem; line-height: 1.9; color: var(--text); font-style: italic; border-left: 3px solid var(--accent); margin: 0 0 1.5rem; background: linear-gradient(135deg, rgba(208,80,48,0.07), transparent); border-radius: 0 10px 10px 0; }
