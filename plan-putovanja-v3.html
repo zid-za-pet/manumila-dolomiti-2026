@@ -313,11 +313,6 @@
   .nav-days.nav-days-visible { display: flex; }
   .nav-day-select { appearance: none; -webkit-appearance: none; background: var(--surface2); color: var(--text); font-family: 'Quicksand', sans-serif; font-size: 0.9rem; font-weight: 700; padding: 0.5rem 2.2rem 0.5rem 1rem; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 10px; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a4838' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.7rem center; min-height: 44px; transition: border-color 0.2s; }
   .nav-day-select:focus { outline: none; border-color: var(--accent); }
-  .nav-day-prev, .nav-day-next { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1.5px solid rgba(0,0,0,0.1); background: var(--surface2); color: var(--text-dim); font-size: 1rem; cursor: pointer; transition: all 0.2s; flex-shrink: 0; font-family: sans-serif; }
-  .nav-day-prev:hover, .nav-day-next:hover { border-color: var(--accent); color: var(--accent); }
-  .nav-day-prev:disabled, .nav-day-next:disabled { opacity: 0.3; cursor: default; }
-  .nav-day-map { display: flex; align-items: center; gap: 0.3rem; padding: 0.45rem 0.8rem; border-radius: 10px; border: 1.5px solid rgba(42,138,156,0.25); background: rgba(42,138,156,0.06); color: var(--accent2); font-size: 0.8rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: all 0.2s; flex-shrink: 0; min-height: 40px; font-family: 'Quicksand', sans-serif; }
-  .nav-day-map:hover { border-color: var(--accent2); background: rgba(42,138,156,0.12); text-decoration: none; }
 
   .day-sep { height: 2px; background: linear-gradient(to right, transparent, var(--surface2), transparent); margin: 1rem 0 2rem; }
 
@@ -510,7 +505,6 @@
     <a href="#savjeti" data-nav="savjeti">Savjeti</a>
   </div>
   <div class="nav-days" id="nav-days">
-    <button class="nav-day-prev" id="day-prev" aria-label="Prethodni dan">&#8249;</button>
     <select class="nav-day-select" id="day-select">
       <option value="dan1">Dan 1 — Faaker See</option>
       <option value="dan2">Dan 2 — Sesto</option>
@@ -527,8 +521,6 @@
       <option value="dan13">Dan 13 — Forest Park</option>
       <option value="dan14">Dan 14 — Povratak</option>
     </select>
-    <button class="nav-day-next" id="day-next" aria-label="Sljedeći dan">&#8250;</button>
-    <a href="#karta" class="nav-day-map" id="day-map-btn" data-goto="karta">Karta</a>
   </div>
 </nav>
 
@@ -3293,8 +3285,6 @@
 
   var navDays = document.getElementById('nav-days');
   var daySelect = document.getElementById('day-select');
-  var dayPrevBtn = document.getElementById('day-prev');
-  var dayNextBtn = document.getElementById('day-next');
   var sectionLinks = document.querySelectorAll('#nav-sections a[data-nav]');
   var isInDaysMode = false;
 
@@ -3345,9 +3335,6 @@
   }
 
   function updateDayButtons(dayId) {
-    var idx = days.indexOf(dayId);
-    if (dayPrevBtn) dayPrevBtn.disabled = idx <= 0;
-    if (dayNextBtn) dayNextBtn.disabled = idx >= days.length - 1;
   }
 
   // Scroll-spy: highlight current day while scrolling
@@ -3375,27 +3362,6 @@
       var dayId = daySelect.value;
       history.pushState(null, null, '#' + dayId);
       showPage(dayId);
-    });
-  }
-  // Prev/Next buttons
-  if (dayPrevBtn) {
-    dayPrevBtn.addEventListener('click', function() {
-      var idx = days.indexOf(daySelect ? daySelect.value : 'dan1');
-      if (idx > 0) {
-        var dayId = days[idx - 1];
-        history.pushState(null, null, '#' + dayId);
-        showPage(dayId);
-      }
-    });
-  }
-  if (dayNextBtn) {
-    dayNextBtn.addEventListener('click', function() {
-      var idx = days.indexOf(daySelect ? daySelect.value : 'dan1');
-      if (idx < days.length - 1) {
-        var dayId = days[idx + 1];
-        history.pushState(null, null, '#' + dayId);
-        showPage(dayId);
-      }
     });
   }
 
@@ -3625,6 +3591,10 @@
   var scrollThreshold = 10;
 
   window.addEventListener('scroll', function() {
+    if (isInDaysMode) {
+      if (navHidden) { nav.classList.remove('nav-hidden'); navHidden = false; }
+      return;
+    }
     var currentY = window.scrollY;
     if (currentY < 100) {
       if (navHidden) { nav.classList.remove('nav-hidden'); navHidden = false; }
@@ -3757,11 +3727,6 @@
 
     var sel = document.getElementById('day-select');
     if (sel) sel.value = targetId;
-    var prevBtn = document.getElementById('day-prev');
-    var nextBtn = document.getElementById('day-next');
-    var idx = days.indexOf(targetId);
-    if (prevBtn) prevBtn.disabled = idx <= 0;
-    if (nextBtn) nextBtn.disabled = idx >= days.length - 1;
   }, { passive: true });
 })();
 </script>
