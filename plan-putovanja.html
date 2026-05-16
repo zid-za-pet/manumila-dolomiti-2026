@@ -231,31 +231,46 @@
   .brand-logo-map { width: 50px; height: 50px; display: inline-block; vertical-align: middle; margin-right: 0.5rem; box-shadow: 0 1px 6px rgba(0,0,0,0.1); border: 1.5px solid var(--surface2); }
   .sep { height: 1px; background: linear-gradient(to right, transparent, var(--surface2), transparent); margin: 3rem 0; }
 
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
   @media (max-width: 600px) {
     .hero-stats { gap: 1.5rem; }
-    .route-table { font-size: 0.85rem; }
+    .route-table { font-size: 0.85rem; min-width: 500px; }
     .route-table th, .route-table td { padding: 0.6rem 0.4rem; }
     .day-header { padding: 1.5rem; }
     .day-body { padding: 1.5rem; }
-    .budget-table { font-size: 0.82rem; }
+    .budget-table { font-size: 0.82rem; min-width: 450px; }
+    .timeline-item { min-height: 44px; }
+    .timeline-title a, .timeline-desc a { display: inline-block; min-height: 44px; line-height: 44px; }
+    .brand-logo-hero { width: 100px; height: 100px; }
+    .nav-sections a { padding: 0.65rem 0.7rem; font-size: 0.8rem; }
+    .nav-days a { width: 32px; height: 32px; font-size: 0.75rem; }
+    .day-number { font-size: 2.5rem; }
   }
 
-  /* ===== SPA NAVIGATION ===== */
-  section[id]:not(.spa-active) { display: none !important; }
+  /* ===== SPA + SCROLL HYBRID ===== */
+  section[id] { display: none; }
+  section.spa-active { display: block !important; }
+  section.spa-day { display: block !important; }
   .sep { display: none; }
 
   .nav { position: sticky; top: 0; z-index: 100; background: rgba(243, 232, 220, 0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 0; }
-  .nav-inner { display: flex; gap: 0; max-width: 1400px; margin: 0 auto; overflow-x: auto; scrollbar-width: none; }
-  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-sections { display: flex; gap: 0; max-width: 1400px; margin: 0 auto; overflow-x: auto; scrollbar-width: none; }
+  .nav-sections::-webkit-scrollbar { display: none; }
   .nav a { color: var(--text-dim); text-decoration: none; padding: 0.75rem 0.8rem; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; flex-shrink: 0; border-bottom: 2px solid transparent; white-space: nowrap; font-family: 'Quicksand', sans-serif; }
   .nav a:hover { color: var(--accent); background: rgba(208,80,48,0.08); text-decoration: none; }
   .nav a.nav-active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(208,80,48,0.12); }
-  .nav-sep { width: 1px; background: rgba(0,0,0,0.08); margin: 0.5rem 0; flex-shrink: 0; }
 
-  .day-nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; margin-bottom: 1.5rem; }
-  .day-nav a { color: var(--accent); text-decoration: none; font-size: 0.95rem; padding: 0.5rem 1.2rem; border-radius: 8px; background: var(--surface); border: 1px solid rgba(0,0,0,0.06); transition: all 0.2s; }
-  .day-nav a:hover { background: var(--surface2); border-color: var(--accent); text-decoration: none; }
-  .day-nav .dn-current { font-weight: 600; color: var(--text); font-size: 0.9rem; }
+  .nav-days { display: none; overflow-x: auto; scrollbar-width: none; background: var(--surface); border-top: 1px solid rgba(0,0,0,0.06); padding: 0.3rem 0.5rem; gap: 0; justify-content: center; }
+  .nav-days::-webkit-scrollbar { display: none; }
+  .nav-days.nav-days-visible { display: flex; }
+  .nav-days a { color: var(--text-dim); text-decoration: none; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; transition: all 0.2s; border: none; padding: 0; }
+  .nav-days a:hover { background: rgba(208,80,48,0.1); color: var(--accent); text-decoration: none; }
+  .nav-days a.day-active { background: var(--accent); color: #fff; }
+
+  .day-sep { height: 2px; background: linear-gradient(to right, transparent, var(--surface2), transparent); margin: 1rem 0 2rem; }
+
+  .day-nav { display: none; }
 
   .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
   .cat-card { background: var(--surface); border-radius: var(--radius); padding: 1.5rem; border: 1px solid rgba(0,0,0,0.06); transition: all 0.3s; cursor: pointer; }
@@ -386,12 +401,10 @@
 </section>
 
 <nav class="nav" id="main-nav">
-  <div class="nav-inner">
+  <div class="nav-sections" id="nav-sections">
     <a href="#top" data-nav="top">Home</a>
     <a href="#pregled" data-nav="pregled">Pregled</a>
-    <div class="nav-sep"></div>
-    <a href="#dan1" data-nav="dan1">D1</a><a href="#dan2" data-nav="dan2">D2</a><a href="#dan3" data-nav="dan3">D3</a><a href="#dan4" data-nav="dan4">D4</a><a href="#dan5" data-nav="dan5">D5</a><a href="#dan6" data-nav="dan6">D6</a><a href="#dan7" data-nav="dan7">D7</a><a href="#dan8" data-nav="dan8">D8</a><a href="#dan9" data-nav="dan9">D9</a><a href="#dan10" data-nav="dan10">D10</a><a href="#dan11" data-nav="dan11">D11</a><a href="#dan12" data-nav="dan12">D12</a><a href="#dan13" data-nav="dan13">D13</a><a href="#dan14" data-nav="dan14">D14</a>
-    <div class="nav-sep"></div>
+    <a href="#dan1" data-nav="dani" class="nav-dani-trigger">Dani</a>
     <a href="#aktivnosti" data-nav="aktivnosti">Aktivnosti</a>
     <a href="#karta" data-nav="karta">Karta</a>
     <a href="#ruta" data-nav="ruta">Ruta</a>
@@ -399,10 +412,12 @@
     <a href="#legende" data-nav="legende">Legende</a>
     <a href="#muzeji" data-nav="muzeji">Muzeji</a>
     <a href="#istrazivaci" data-nav="istrazivaci">Istraživači</a>
-    <div class="nav-sep"></div>
     <a href="#budzet" data-nav="budzet">Budžet</a>
     <a href="#linkovi" data-nav="linkovi">Linkovi</a>
     <a href="#savjeti" data-nav="savjeti">Savjeti</a>
+  </div>
+  <div class="nav-days" id="nav-days">
+    <a href="#dan1" data-day="dan1">1</a><a href="#dan2" data-day="dan2">2</a><a href="#dan3" data-day="dan3">3</a><a href="#dan4" data-day="dan4">4</a><a href="#dan5" data-day="dan5">5</a><a href="#dan6" data-day="dan6">6</a><a href="#dan7" data-day="dan7">7</a><a href="#dan8" data-day="dan8">8</a><a href="#dan9" data-day="dan9">9</a><a href="#dan10" data-day="dan10">10</a><a href="#dan11" data-day="dan11">11</a><a href="#dan12" data-day="dan12">12</a><a href="#dan13" data-day="dan13">13</a><a href="#dan14" data-day="dan14">14</a>
   </div>
 </nav>
 
@@ -3026,23 +3041,33 @@
   var days = ['dan1','dan2','dan3','dan4','dan5','dan6','dan7','dan8','dan9','dan10','dan11','dan12','dan13','dan14'];
   var dayNames = ['Zagreb → Faaker See','Faaker See → Sesto','Sesto — Fiscalina','Sesto — Acquafun','Sesto → Braies → Siusi','Siusi — E-bike','Siusi — Seceda','Siusi → Caldaro','Caldaro — SUP + Vino','Caldaro → Carezza → Fassa','Fassa — Ciampedie','Fassa → Molveno','Molveno — Forest Park','Molveno → Zagreb'];
 
-  // Add day navigation to each day section
+  // Add separators between days and wrap tables in scroll containers
   days.forEach(function(id, i) {
     var section = document.getElementById(id);
     if (!section) return;
-    var dayCard = section.querySelector('.day-card');
-    if (!dayCard) return;
-
-    function makeDayNav() {
-      var nav = document.createElement('div');
-      nav.className = 'day-nav';
-      var prev = i > 0 ? '<a data-goto="' + days[i-1] + '">&larr; Dan ' + i + '</a>' : '<span></span>';
-      var next = i < 13 ? '<a data-goto="' + days[i+1] + '">Dan ' + (i+2) + ' &rarr;</a>' : '<a data-goto="pregled">Pregled &rarr;</a>';
-      nav.innerHTML = prev + '<span class="dn-current">Dan ' + (i+1) + ' — ' + dayNames[i] + '</span>' + next;
-      return nav;
+    if (i > 0) {
+      var sep = document.createElement('div');
+      sep.className = 'day-sep';
+      section.querySelector('.section') && section.querySelector('.section').prepend(sep);
     }
-    dayCard.before(makeDayNav());
-    dayCard.after(makeDayNav());
+    // Wrap route-tables and budget-tables in scroll containers
+    section.querySelectorAll('.route-table, .budget-table').forEach(function(table) {
+      if (!table.parentElement.classList.contains('table-scroll')) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'table-scroll';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+      }
+    });
+  });
+  // Wrap all tables in scroll containers (non-day sections too)
+  document.querySelectorAll('.route-table, .budget-table').forEach(function(table) {
+    if (!table.parentElement.classList.contains('table-scroll')) {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'table-scroll';
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    }
   });
 
   var temps = [
@@ -3164,24 +3189,91 @@
     });
   });
 
-  function showPage(id) {
+  var navDays = document.getElementById('nav-days');
+  var dayLinks = navDays ? navDays.querySelectorAll('a[data-day]') : [];
+  var sectionLinks = document.querySelectorAll('#nav-sections a[data-nav]');
+  var isInDaysMode = false;
+
+  function showPage(id, scrollToDay) {
     id = id || 'top';
-    sections.forEach(function(s) { s.classList.remove('spa-active'); });
-    var target = document.getElementById(id);
-    if (target) target.classList.add('spa-active');
-    navLinks.forEach(function(a) {
-      a.classList.toggle('nav-active', a.getAttribute('data-nav') === id);
-    });
+    var isDayId = days.indexOf(id) >= 0;
+
+    sections.forEach(function(s) { s.classList.remove('spa-active', 'spa-day'); });
+
+    if (isDayId || id === 'dani') {
+      isInDaysMode = true;
+      days.forEach(function(dayId) {
+        var el = document.getElementById(dayId);
+        if (el) el.classList.add('spa-day');
+      });
+      if (navDays) navDays.classList.add('nav-days-visible');
+      sectionLinks.forEach(function(a) {
+        a.classList.toggle('nav-active', a.getAttribute('data-nav') === 'dani');
+      });
+      if (scrollToDay !== false) {
+        var targetDay = isDayId ? id : 'dan1';
+        var targetEl = document.getElementById(targetDay);
+        if (targetEl) {
+          setTimeout(function() {
+            var navH = document.getElementById('main-nav').offsetHeight;
+            var top = targetEl.getBoundingClientRect().top + window.scrollY - navH - 8;
+            window.scrollTo({ top: top, behavior: scrollToDay === 'instant' ? 'auto' : 'smooth' });
+          }, 50);
+        }
+        setActiveDay(targetDay);
+      }
+    } else {
+      isInDaysMode = false;
+      var target = document.getElementById(id);
+      if (target) target.classList.add('spa-active');
+      if (navDays) navDays.classList.remove('nav-days-visible');
+      sectionLinks.forEach(function(a) {
+        a.classList.toggle('nav-active', a.getAttribute('data-nav') === id);
+      });
+      window.scrollTo(0, 0);
+    }
     footer.style.display = '';
-    window.scrollTo(0, 0);
   }
 
-  window.addEventListener('hashchange', function() {
-    showPage(location.hash.slice(1) || 'top');
+  function setActiveDay(dayId) {
+    dayLinks.forEach(function(a) {
+      a.classList.toggle('day-active', a.getAttribute('data-day') === dayId);
+    });
+    var activeLink = navDays ? navDays.querySelector('.day-active') : null;
+    if (activeLink) {
+      activeLink.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    }
+  }
+
+  // Scroll-spy: highlight current day while scrolling
+  var scrollSpyTimer;
+  window.addEventListener('scroll', function() {
+    if (!isInDaysMode) return;
+    clearTimeout(scrollSpyTimer);
+    scrollSpyTimer = setTimeout(function() {
+      var navH = document.getElementById('main-nav').offsetHeight + 20;
+      var current = null;
+      for (var i = days.length - 1; i >= 0; i--) {
+        var el = document.getElementById(days[i]);
+        if (el && el.getBoundingClientRect().top <= navH) {
+          current = days[i];
+          break;
+        }
+      }
+      if (current) setActiveDay(current);
+    }, 80);
   });
 
-  // Handle all navigation clicks (nav + day-nav + back-links)
+  // Handle all navigation clicks
   document.addEventListener('click', function(e) {
+    var dayPill = e.target.closest('#nav-days a[data-day]');
+    if (dayPill) {
+      e.preventDefault();
+      var dayId = dayPill.getAttribute('data-day');
+      history.pushState(null, null, '#' + dayId);
+      showPage(dayId);
+      return;
+    }
     var link = e.target.closest('[data-goto]');
     if (link) {
       e.preventDefault();
@@ -3190,22 +3282,30 @@
       showPage(page);
       return;
     }
-    var navLink = e.target.closest('#main-nav a[data-nav]');
+    var navLink = e.target.closest('#nav-sections a[data-nav]');
     if (navLink) {
       e.preventDefault();
       var page = navLink.getAttribute('data-nav');
-      history.pushState(null, null, '#' + page);
-      showPage(page);
+      var href = navLink.getAttribute('href').slice(1);
+      history.pushState(null, null, '#' + href);
+      if (page === 'dani') {
+        showPage('dan1');
+      } else {
+        showPage(href);
+      }
     }
   });
 
-  // Handle back/forward
+  window.addEventListener('hashchange', function() {
+    showPage(location.hash.slice(1) || 'top');
+  });
   window.addEventListener('popstate', function() {
     showPage(location.hash.slice(1) || 'top');
   });
 
   // Initial page
-  showPage(location.hash.slice(1) || 'top');
+  var initHash = location.hash.slice(1) || 'top';
+  showPage(initHash, 'instant');
 })();
 
 // ==================== LEAFLET MAP ====================
