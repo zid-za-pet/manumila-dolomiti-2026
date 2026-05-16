@@ -3396,7 +3396,8 @@
   var mapEl = document.getElementById('route-map');
   if (!mapEl || typeof L === 'undefined') return;
 
-  var map = L.map('route-map', { scrollWheelZoom: false, zoomControl: true }).setView([46.35, 12.2], 8);
+  var map = L.map('route-map', { scrollWheelZoom: false, zoomControl: false }).setView([46.35, 12.2], 8);
+  L.control.zoom({ position: 'bottomright' }).addTo(map);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a> | Ruta: Avanture kamperom ManuMila',
     maxZoom: 18,
