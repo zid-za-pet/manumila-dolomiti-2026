@@ -227,8 +227,9 @@
   .footer-disclaimer { background: rgba(243,156,18,0.08); border: 1px solid rgba(243,156,18,0.25); border-radius: 10px; padding: 1rem 1.2rem; margin: 0 auto 1.5rem; max-width: 600px; text-align: left; }
   .footer-disclaimer strong { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #b87008; margin-bottom: 0.3rem; }
   .footer-disclaimer p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; margin: 0; }
-  .footer-brand { display: flex; align-items: center; justify-content: center; gap: 0.8rem; font-size: 0.85rem; color: var(--text-dim); }
-  .footer-brand .brand-logo-footer { margin: 0; width: 40px; height: 40px; }
+  .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .footer-brand-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); margin: 0; }
+  .footer-brand .brand-logo-footer { margin: 0; width: 120px; height: auto; border-radius: 0; box-shadow: none; border: none; object-fit: contain; }
 
   .brand-logo { border-radius: 50%; object-fit: cover; display: block; margin: 0 auto; }
   .brand-logo-hero { width: 140px; height: 140px; margin-bottom: 1.5rem; box-shadow: 0 4px 20px rgba(0,0,0,0.25); border: 3px solid rgba(255,255,255,0.3); }
@@ -3094,8 +3095,8 @@
     <p>Cijene, radno vrijeme i dostupnost provjereni web istraživanjem (svibanj 2026). Podaci su okvirni — obavezno provjerite bliže datumu putovanja jer se mogu promijeniti.</p>
   </div>
   <div class="footer-brand">
-    <img src="logo.jpg" alt="ManuMila logo" class="brand-logo brand-logo-footer">
-    <span>Produkcija rute: <strong>Avanture kamperom ManuMila</strong></span>
+    <p class="footer-brand-label">Produkcija rute</p>
+    <img src="logo.jpg" alt="Avanture kamperom ManuMila" class="brand-logo brand-logo-footer">
   </div>
 </footer>
 
