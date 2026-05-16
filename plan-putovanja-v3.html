@@ -259,6 +259,15 @@
   .pc-cost-low { color: #27ae60; }
   .pregled-total { display: flex; justify-content: space-between; padding: 1rem; font-weight: 800; font-size: 1.1rem; color: var(--accent); border-top: 2px solid var(--accent); margin-top: 0.5rem; font-family: 'Baloo 2', cursive; }
 
+  /* ===== MAP INTRO ===== */
+  .map-intro { margin-bottom: 1rem; }
+  .map-intro h2 { font-family: 'Baloo 2', cursive; font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .map-legend-inline { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+  .mli-item { display: flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; font-weight: 600; color: var(--text-dim); }
+  .mli-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .mli-line-icon { width: 16px; height: 3px; background: #d05030; border-radius: 2px; flex-shrink: 0; }
+  .map-hint { font-size: 0.78rem; color: var(--text-dim); opacity: 0.6; }
+
   .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
   @media (max-width: 600px) {
@@ -2681,19 +2690,17 @@
 </section>
 
 <!-- ==================== INTERAKTIVNA KARTA ==================== -->
-<section class="section" id="karta">
-  <div class="section-header">
-    <h2>Interaktivna karta rute</h2>
-    <p class="subtitle">Klikni na svaku točku za detalje. Zlatne = naša ruta. Tirkizne = alternative koje propuštamo.</p>
+<section class="section" id="karta" style="padding-top: 1.5rem;">
+  <div class="map-intro">
+    <h2>Karta rute</h2>
+    <div class="map-legend-inline">
+      <span class="mli-item mli-main"><span class="mli-dot" style="background:#d05030;"></span> Naša ruta</span>
+      <span class="mli-item mli-alt"><span class="mli-dot" style="background:#2a8a9c;"></span> Alternative</span>
+      <span class="mli-item mli-line"><span class="mli-line-icon"></span> Put</span>
+    </div>
+    <p class="map-hint">Klikni na točku za detalje</p>
   </div>
-  <a href="#pregled" class="back-link" data-goto="pregled">&larr; Natrag na pregled</a>
   <div id="route-map"></div>
-  <div class="map-legend">
-    <span class="ml-main">Naša ruta (14 dana)</span>
-    <span class="ml-alt">Alternative / propuštamo</span>
-    <span class="ml-route">Linija puta</span>
-  </div>
-  <div class="map-brand"><img src="logo.jpg" alt="ManuMila" class="brand-logo brand-logo-map">Produkcija rute: <strong>Avanture kamperom ManuMila</strong></div>
 </section>
 
 <!-- ==================== RUTA & KRAJOLICI ==================== -->
