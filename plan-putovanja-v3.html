@@ -288,6 +288,14 @@
   .nav-sections.nav-scrolled-end { -webkit-mask-image: linear-gradient(to left, black 85%, transparent 100%); mask-image: linear-gradient(to left, black 85%, transparent 100%); }
   .nav-sections.nav-scrolled-mid { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 85%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 8%, black 85%, transparent 100%); }
   .nav-sections::-webkit-scrollbar { display: none; }
+  .nav-scroll-hint { position: absolute; top: 0; bottom: 0; width: 32px; display: flex; align-items: center; justify-content: center; pointer-events: none; z-index: 5; font-size: 1rem; color: var(--accent); opacity: 0; transition: opacity 0.3s; }
+  .nav-scroll-hint-right { right: 0; background: linear-gradient(to left, var(--bg) 30%, transparent 100%); }
+  .nav-scroll-hint-left { left: 0; background: linear-gradient(to right, var(--bg) 30%, transparent 100%); }
+  .nav-scroll-hint.visible { opacity: 1; }
+  .nav-scroll-hint span { animation: nudge 1.5s ease-in-out infinite; display: block; }
+  .nav-scroll-hint-left span { animation-name: nudgeLeft; }
+  @keyframes nudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+  @keyframes nudgeLeft { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
   .nav a { color: var(--text-dim); text-decoration: none; padding: 0.75rem 0.8rem; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; flex-shrink: 0; border-bottom: 2px solid transparent; white-space: nowrap; font-family: 'Quicksand', sans-serif; }
   .nav a:hover { color: var(--accent); background: rgba(208,80,48,0.08); text-decoration: none; }
   .nav a.nav-active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(208,80,48,0.12); }
@@ -471,7 +479,9 @@
   </div>
 </section>
 
-<nav class="nav" id="main-nav">
+<nav class="nav" id="main-nav" style="position:relative;">
+  <div class="nav-scroll-hint nav-scroll-hint-left" id="nav-hint-left"><span>‹</span></div>
+  <div class="nav-scroll-hint nav-scroll-hint-right visible" id="nav-hint-right"><span>›</span></div>
   <div class="nav-sections" id="nav-sections">
     <a href="#top" data-nav="top">Home</a>
     <a href="#pregled" data-nav="pregled">Pregled</a>
@@ -3492,23 +3502,24 @@
 
 // ==================== V3 UX IMPROVEMENTS ====================
 (function() {
-  // --- 0. NAV SCROLL FADE HINT ---
+  // --- 0. NAV SCROLL FADE + ARROW HINTS ---
   var navSections = document.getElementById('nav-sections');
+  var hintLeft = document.getElementById('nav-hint-left');
+  var hintRight = document.getElementById('nav-hint-right');
   if (navSections) {
     function updateNavFade() {
       var sl = navSections.scrollLeft;
       var maxScroll = navSections.scrollWidth - navSections.clientWidth;
-      if (maxScroll <= 2) {
-        navSections.classList.remove('nav-scrolled-end', 'nav-scrolled-mid');
-      } else if (sl <= 5) {
-        navSections.classList.remove('nav-scrolled-end', 'nav-scrolled-mid');
-      } else if (sl >= maxScroll - 5) {
-        navSections.classList.add('nav-scrolled-end');
-        navSections.classList.remove('nav-scrolled-mid');
-      } else {
-        navSections.classList.add('nav-scrolled-mid');
-        navSections.classList.remove('nav-scrolled-end');
-      }
+      var atStart = sl <= 5;
+      var atEnd = sl >= maxScroll - 5;
+      var noScroll = maxScroll <= 2;
+
+      navSections.classList.remove('nav-scrolled-end', 'nav-scrolled-mid');
+      if (!noScroll && atEnd) navSections.classList.add('nav-scrolled-end');
+      else if (!noScroll && !atStart) navSections.classList.add('nav-scrolled-mid');
+
+      if (hintRight) hintRight.classList.toggle('visible', !noScroll && !atEnd);
+      if (hintLeft) hintLeft.classList.toggle('visible', !noScroll && !atStart);
     }
     navSections.addEventListener('scroll', updateNavFade);
     updateNavFade();
