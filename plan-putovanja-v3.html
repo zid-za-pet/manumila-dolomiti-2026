@@ -32,8 +32,39 @@
   a:hover { text-decoration: underline; }
 
   .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; background: linear-gradient(135deg, #d05030 0%, #e07a18 50%, #2a8a9c 100%); position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(224,122,24,0.15) 0%, transparent 50%); }
+  .hero-landing { min-height: auto; padding: 0; }
+  .hero-landing .hero-content { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; }
+  .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(224,122,24,0.15) 0%, transparent 50%); pointer-events: none; }
   .hero-content { position: relative; z-index: 1; max-width: 800px; width: 100%; text-align: center; margin: 0 auto; }
+  .hero-scroll-hint { font-size: 1.5rem; color: rgba(255,255,255,0.5); animation: scrollBounce 2s ease-in-out infinite; margin-top: 1rem; }
+  @keyframes scrollBounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+  /* ===== LANDING PAGE SECTIONS ===== */
+  .landing-section { position: relative; z-index: 1; padding: 4rem 2rem; max-width: 700px; margin: 0 auto; }
+  .landing-title { font-family: 'Baloo 2', cursive; font-size: 1.8rem; color: #fff; margin-bottom: 1.5rem; text-align: center; text-shadow: 1px 1px 0 rgba(0,0,0,0.1); }
+  .landing-text { color: rgba(255,255,255,0.85); font-size: 1.05rem; line-height: 1.8; text-align: center; margin-bottom: 2rem; }
+  .landing-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .landing-feat { display: flex; gap: 0.7rem; align-items: flex-start; background: rgba(255,255,255,0.12); border-radius: 12px; padding: 1rem; backdrop-filter: blur(10px); }
+  .landing-feat-icon { font-size: 1.2rem; color: #fff; flex-shrink: 0; }
+  .landing-feat div { color: rgba(255,255,255,0.9); font-size: 0.9rem; line-height: 1.5; }
+  .landing-feat strong { color: #fff; display: block; margin-bottom: 0.15rem; }
+  @media (max-width: 600px) { .landing-features { grid-template-columns: 1fr; } }
+
+  .landing-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .landing-photo-card { border-radius: 12px; overflow: hidden; position: relative; }
+  .landing-photo-card img { width: 100%; height: 160px; object-fit: cover; display: block; }
+  .landing-photo-card span { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.5rem 0.7rem; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: #fff; font-size: 0.8rem; font-weight: 600; }
+  @media (max-width: 400px) { .landing-gallery { grid-template-columns: 1fr; } .landing-photo-card img { height: 200px; } }
+
+  .landing-benefits { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2.5rem; }
+  .landing-benefit { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.95); padding: 0.8rem 1.2rem; border-radius: 10px; font-size: 0.95rem; font-weight: 500; backdrop-filter: blur(10px); }
+  .landing-benefit::before { content: '✓ '; color: rgba(255,255,255,0.7); font-weight: 700; }
+  .landing-cta { font-size: 1.15rem; padding: 1.1rem 3.5rem; margin-bottom: 2rem; }
+  .landing-brand { color: rgba(255,255,255,0.4); font-size: 0.8rem; text-align: center; }
+  .landing-final { text-align: center; padding-bottom: 3rem; }
+
+  /* ===== HIDE NAV ON HOME ===== */
+  .nav.nav-home-hidden { display: none; }
   .hero-badge { display: inline-block; background: rgba(255,255,255,0.2); color: #fff; padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2rem; font-family: 'Quicksand', sans-serif; }
   .hero h1 { font-family: 'Baloo 2', cursive; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1rem; color: #fff; -webkit-text-stroke: 1.5px rgba(0,0,0,0.1); text-shadow: 3px 3px 0 rgba(0,0,0,0.1), 0 0 20px rgba(255,255,255,0.2); }
   .hero-subtitle { font-size: 1.3rem; color: rgba(255,255,255,0.7); margin-bottom: 3rem; font-weight: 300; }
@@ -265,7 +296,7 @@
   .map-legend-inline { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
   .mli-item { display: flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; font-weight: 600; color: var(--text-dim); }
   .mli-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .mli-line-icon { width: 16px; height: 3px; background: #d05030; border-radius: 2px; flex-shrink: 0; }
+  .mli-line-icon { width: 16px; height: 3px; background: #e8860b; border-radius: 2px; flex-shrink: 0; }
   .map-hint { font-size: 0.78rem; color: var(--text-dim); opacity: 0.6; }
 
   .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -448,9 +479,9 @@
   @media (max-width: 600px) { #route-map { height: 400px; } }
   .map-legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem; font-size: 0.85rem; color: var(--text-dim); }
   .map-legend span::before { content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 0.4rem; vertical-align: -1px; }
-  .map-legend .ml-main::before { background: #d05030; }
+  .map-legend .ml-main::before { background: #e8860b; }
   .map-legend .ml-alt::before { background: #2a8a9c; }
-  .map-legend .ml-route::before { background: #d05030; border-radius: 0; height: 3px; width: 20px; vertical-align: 2px; }
+  .map-legend .ml-route::before { background: #e8860b; border-radius: 0; height: 3px; width: 20px; vertical-align: 2px; }
   .leaflet-popup-content-wrapper { border-radius: 10px !important; font-family: 'Quicksand', sans-serif !important; }
   .leaflet-popup-content { font-size: 0.85rem !important; line-height: 1.6 !important; margin: 10px 14px !important; }
   .leaflet-popup-content strong { color: #d05030; }
@@ -517,20 +548,93 @@
 </head>
 <body>
 
-<section class="hero" id="top">
+<section class="hero hero-landing" id="top">
+
+  <!-- SCREEN 1: Hero -->
   <div class="hero-content">
     <img src="logo.jpg" alt="ManuMila logo" class="brand-logo brand-logo-hero">
     <div class="hero-badge">Avanture kamperom ManuMila &middot; Ljeto 2026</div>
     <h1>Dolomiti &amp; Alpska Jezera</h1>
-    <p class="hero-subtitle">14 dana kamperom kroz najljepše krajeve Europe.<br>Za obitelj s dvoje djece (12 i 7 god). Provjereni podaci. Realne cijene.</p>
+    <p class="hero-subtitle">14 dana kamperom kroz najljepše krajeve Europe.<br>Za obitelj s dvoje djece (12 i 7 god).</p>
     <div class="hero-stats">
       <div class="hero-stat"><span class="hero-stat-value">14</span><span class="hero-stat-label">Dana</span></div>
       <div class="hero-stat"><span class="hero-stat-value">6</span><span class="hero-stat-label">Baza</span></div>
       <div class="hero-stat"><span class="hero-stat-value">~1.200</span><span class="hero-stat-label">km ukupno</span></div>
       <div class="hero-stat"><span class="hero-stat-value">~€2.630</span><span class="hero-stat-label">Budžet</span></div>
     </div>
-    <a href="#pregled" class="hero-cta">Otkrij plan</a>
+    <div class="hero-scroll-hint">&#8595;</div>
   </div>
+
+  <!-- SCREEN 2: Za koga -->
+  <div class="landing-section">
+    <h2 class="landing-title">Plan skrojen za vašu obitelj</h2>
+    <p class="landing-text">Dvoje roditelja, dvoje djece (12 i 7 godina), jedan kamper — i 14 dana avanture. Svaki dan je prilagođen obiteljskom ritmu: aktivnosti koje pale i mlade i starije, realni tempi bez jurnjave, i uvijek plan B za kišu.</p>
+    <div class="landing-features">
+      <div class="landing-feat">
+        <span class="landing-feat-icon">&#9745;</span>
+        <div><strong>Provjerene cijene</strong><br>Web-istraživanje, svibanj 2026</div>
+      </div>
+      <div class="landing-feat">
+        <span class="landing-feat-icon">&#9745;</span>
+        <div><strong>Testirani kampovi</strong><br>S ocjenama, cijenama i linkovima</div>
+      </div>
+      <div class="landing-feat">
+        <span class="landing-feat-icon">&#9745;</span>
+        <div><strong>Dječje aktivnosti</strong><br>Na svakom koraku, za obje dobi</div>
+      </div>
+      <div class="landing-feat">
+        <span class="landing-feat-icon">&#9745;</span>
+        <div><strong>Plan B za kišu</strong><br>Alternativa za svaki dan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Highlights fotke -->
+  <div class="landing-section">
+    <h2 class="landing-title">Što vas čeka</h2>
+    <div class="landing-gallery">
+      <div class="landing-photo-card">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&h=400&fit=crop&auto=format&q=75" alt="Lago di Braies" loading="lazy">
+        <span>Lago di Braies</span>
+      </div>
+      <div class="landing-photo-card">
+        <img src="https://images.unsplash.com/photo-1683899266259-ecc9728acf12?w=600&h=400&fit=crop&auto=format&q=75" alt="Seceda" loading="lazy">
+        <span>Seceda — rub svijeta</span>
+      </div>
+      <div class="landing-photo-card">
+        <img src="https://images.unsplash.com/photo-1631044807448-4da5d04b836c?w=600&h=400&fit=crop&auto=format&q=75" alt="Alpe di Siusi" loading="lazy">
+        <span>Alpe di Siusi e-bike</span>
+      </div>
+      <div class="landing-photo-card">
+        <img src="https://images.unsplash.com/photo-1564416178719-cc9cad556230?w=600&h=400&fit=crop&auto=format&q=75" alt="Lago di Carezza" loading="lazy">
+        <span>Lago di Carezza</span>
+      </div>
+      <div class="landing-photo-card">
+        <img src="https://images.unsplash.com/photo-1749127558503-1148de20df2e?w=600&h=400&fit=crop&auto=format&q=75" alt="Rosengarten" loading="lazy">
+        <span>Rosengarten zalazak</span>
+      </div>
+      <div class="landing-photo-card">
+        <img src="https://images.pexels.com/photos/28492009/pexels-photo-28492009.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" alt="Molveno" loading="lazy">
+        <span>Lago di Molveno</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: Benefiti + CTA -->
+  <div class="landing-section landing-final">
+    <h2 class="landing-title">Što dobivate</h2>
+    <div class="landing-benefits">
+      <div class="landing-benefit">Detaljan plan za svih 14 dana</div>
+      <div class="landing-benefit">Kampovi s cijenama i rezervacijskim linkovima</div>
+      <div class="landing-benefit">Interaktivna karta s rutom i alternativama</div>
+      <div class="landing-benefit">Vremenski raspored, realne procjene vremena</div>
+      <div class="landing-benefit">Dječje aktivnosti, vodeni parkovi, tobogani</div>
+      <div class="landing-benefit">Kompletni budžet — bez iznenađenja</div>
+    </div>
+    <a href="#pregled" class="hero-cta landing-cta">Otkrij plan &#8594;</a>
+    <p class="landing-brand">Produkcija rute: Avanture kamperom ManuMila</p>
+  </div>
+
 </section>
 
 <nav class="nav" id="main-nav" style="position:relative;">
@@ -2761,7 +2865,7 @@
   <div class="map-intro">
     <h2>Karta rute</h2>
     <div class="map-legend-inline">
-      <span class="mli-item mli-main"><span class="mli-dot" style="background:#d05030;"></span> Naša ruta</span>
+      <span class="mli-item mli-main"><span class="mli-dot" style="background:#e8860b;"></span> Naša ruta</span>
       <span class="mli-item mli-alt"><span class="mli-dot" style="background:#2a8a9c;"></span> Alternative</span>
       <span class="mli-item mli-line"><span class="mli-line-icon"></span> Put</span>
     </div>
@@ -3424,12 +3528,19 @@
   function showPage(id, scrollToDay) {
     id = id || 'top';
     var isDayId = days.indexOf(id) >= 0;
+    var navEl = document.getElementById('main-nav');
 
     sections.forEach(function(s) { s.classList.remove('spa-active', 'spa-day', 'day-current'); });
 
+    // Hide nav on home/landing page
+    if (id === 'top') {
+      if (navEl) navEl.classList.add('nav-home-hidden');
+    } else {
+      if (navEl) navEl.classList.remove('nav-home-hidden');
+    }
+
     if (isDayId || id === 'dani') {
       isInDaysMode = true;
-      var navEl = document.getElementById('main-nav');
       if (navEl) navEl.classList.remove('nav-hidden');
       days.forEach(function(dayId) {
         var el = document.getElementById(dayId);
@@ -3451,7 +3562,7 @@
       });
       window.scrollTo(0, 0);
     }
-    footer.style.display = '';
+    footer.style.display = (id === 'top') ? 'none' : '';
   }
 
   // Day select dropdown
@@ -3605,7 +3716,7 @@
       '<br><span style="font-size:0.75rem;color:#8a7e74;letter-spacing:0.5px;">' + s.day + '</span>' +
       '<br><span style="font-size:0.85rem;color:#5a4838;line-height:1.5;">' + s.desc + '</span>' +
       '<br><a href="#' + s.link + '" class="popup-goto" data-goto="' + s.link + '">Otvori dan &rarr;</a>';
-    L.marker(s.ll, { icon: makeIcon(dayLabels[i], '#d05030', '#b0381e'), zIndexOffset: 1000 })
+    L.marker(s.ll, { icon: makeIcon(dayLabels[i], '#e8860b', '#c06e08'), zIndexOffset: 1000 })
       .addTo(map)
       .bindPopup(popupHtml);
   });
@@ -3650,13 +3761,13 @@
     .then(function(data) {
       if (data.routes && data.routes[0]) {
         var pts = data.routes[0].geometry.coordinates.map(function(c) { return [c[1], c[0]]; });
-        L.polyline(pts, { color: '#d05030', weight: 3.5, opacity: 0.75 }).addTo(map);
+        L.polyline(pts, { color: '#e8860b', weight: 3.5, opacity: 0.75 }).addTo(map);
       }
     })
     .catch(function() {
       var fallback = mainStops.map(function(s) { return s.ll; });
       fallback.push([45.815, 15.982]);
-      L.polyline(fallback, { color: '#d05030', weight: 3, opacity: 0.6, dashArray: '8, 6' }).addTo(map);
+      L.polyline(fallback, { color: '#e8860b', weight: 3, opacity: 0.6, dashArray: '8, 6' }).addTo(map);
     });
 
   var observer = new IntersectionObserver(function(entries) {
