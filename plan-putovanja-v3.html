@@ -395,8 +395,8 @@
   .route-landscape .section-photo, .route-stop .section-photo { height: 160px; border-radius: 10px; margin-bottom: 1rem; }
   .legend-card .section-photo { height: 140px; border-radius: 8px; margin-bottom: 0.8rem; }
 
-  .popup-goto { display: inline-block; margin-top: 0.5rem; padding: 0.4rem 0.8rem; background: var(--accent); color: #fff; border-radius: 6px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: background 0.2s; }
-  .popup-goto:hover { background: #b0381e; text-decoration: none; color: #fff; }
+  .popup-goto { display: inline-block; margin-top: 0.6rem; padding: 0.45rem 1rem; background: linear-gradient(135deg, rgba(208,80,48,0.1), rgba(42,138,156,0.1)); color: var(--text); border: 1.5px solid rgba(208,80,48,0.25); border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: all 0.25s; font-family: 'Quicksand', sans-serif; }
+  .popup-goto:hover { background: linear-gradient(135deg, rgba(208,80,48,0.18), rgba(42,138,156,0.18)); border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 3px 10px rgba(208,80,48,0.15); text-decoration: none; color: var(--accent); }
 
   /* ===== INTERACTIVE MAP ===== */
   #route-map { width: 100%; height: 520px; border-radius: 14px; border: 2px solid rgba(0,0,0,0.08); z-index: 1; }
@@ -3441,9 +3441,9 @@
 
   var dayLabels = ['ZG','D1','D2-4','D5','D5-7','D8-9','D10','D10-11','D12-13'];
   mainStops.forEach(function(s, i) {
-    var popupHtml = '<strong style="color:#d05030;font-size:0.95rem;">' + s.title + '</strong>' +
-      '<br><span style="font-size:0.78rem;color:#5a4838;">' + s.day + '</span>' +
-      '<br><span style="font-size:0.85rem;color:#5a4838;">' + s.desc + '</span>' +
+    var popupHtml = '<strong style="color:#362820;font-size:0.95rem;font-family:Baloo 2,cursive;">' + s.title + '</strong>' +
+      '<br><span style="font-size:0.75rem;color:#8a7e74;letter-spacing:0.5px;">' + s.day + '</span>' +
+      '<br><span style="font-size:0.85rem;color:#5a4838;line-height:1.5;">' + s.desc + '</span>' +
       '<br><a href="#' + s.link + '" class="popup-goto" data-goto="' + s.link + '">Otvori dan &rarr;</a>';
     L.marker(s.ll, { icon: makeIcon(dayLabels[i], '#d05030', '#b0381e'), zIndexOffset: 1000 })
       .addTo(map)
