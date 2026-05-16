@@ -3299,8 +3299,8 @@
 
     if (isDayId || id === 'dani') {
       isInDaysMode = true;
-      nav.classList.remove('nav-hidden');
-      navHidden = false;
+      var navEl = document.getElementById('main-nav');
+      if (navEl) navEl.classList.remove('nav-hidden');
       days.forEach(function(dayId) {
         var el = document.getElementById(dayId);
         if (el) el.classList.add('spa-day');
@@ -3592,26 +3592,24 @@
   // --- 3. AUTO-HIDE NAV ON SCROLL ---
   var nav = document.getElementById('main-nav');
   var lastScrollY = 0;
-  var navHidden = false;
   var scrollThreshold = 10;
 
   window.addEventListener('scroll', function() {
     if (isInDaysMode) {
-      if (navHidden) { nav.classList.remove('nav-hidden'); navHidden = false; }
+      nav.classList.remove('nav-hidden');
       return;
     }
     var currentY = window.scrollY;
+    var hidden = nav.classList.contains('nav-hidden');
     if (currentY < 100) {
-      if (navHidden) { nav.classList.remove('nav-hidden'); navHidden = false; }
+      nav.classList.remove('nav-hidden');
       lastScrollY = currentY;
       return;
     }
-    if (currentY - lastScrollY > scrollThreshold && !navHidden) {
+    if (currentY - lastScrollY > scrollThreshold && !hidden) {
       nav.classList.add('nav-hidden');
-      navHidden = true;
-    } else if (lastScrollY - currentY > scrollThreshold && navHidden) {
+    } else if (lastScrollY - currentY > scrollThreshold && hidden) {
       nav.classList.remove('nav-hidden');
-      navHidden = false;
     }
     lastScrollY = currentY;
   });
