@@ -244,7 +244,7 @@
     .timeline-title a, .timeline-desc a { display: inline-block; min-height: 44px; line-height: 44px; }
     .brand-logo-hero { width: 100px; height: 100px; }
     .nav-sections a { padding: 0.65rem 0.7rem; font-size: 0.8rem; }
-    .nav-days a { width: 32px; height: 32px; font-size: 0.75rem; }
+    .nav-days a { width: 40px; height: 40px; font-size: 0.78rem; }
     .day-number { font-size: 2.5rem; }
   }
 
@@ -254,7 +254,8 @@
   section.spa-day { display: block !important; }
   .sep { display: none; }
 
-  .nav { position: sticky; top: 0; z-index: 100; background: rgba(243, 232, 220, 0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 0; }
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(243, 232, 220, 0.97); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 0; transition: transform 0.3s ease; }
+  .nav.nav-hidden { transform: translateY(-100%); }
   .nav-sections { display: flex; gap: 0; max-width: 1400px; margin: 0 auto; overflow-x: auto; scrollbar-width: none; }
   .nav-sections::-webkit-scrollbar { display: none; }
   .nav a { color: var(--text-dim); text-decoration: none; padding: 0.75rem 0.8rem; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; flex-shrink: 0; border-bottom: 2px solid transparent; white-space: nowrap; font-family: 'Quicksand', sans-serif; }
@@ -264,11 +265,51 @@
   .nav-days { display: none; overflow-x: auto; scrollbar-width: none; background: var(--surface); border-top: 1px solid rgba(0,0,0,0.06); padding: 0.3rem 0.5rem; gap: 0; justify-content: center; }
   .nav-days::-webkit-scrollbar { display: none; }
   .nav-days.nav-days-visible { display: flex; }
-  .nav-days a { color: var(--text-dim); text-decoration: none; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; transition: all 0.2s; border: none; padding: 0; }
+  .nav-days a { color: var(--text-dim); text-decoration: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; transition: all 0.2s; border: none; padding: 0; margin: 0 2px; }
   .nav-days a:hover { background: rgba(208,80,48,0.1); color: var(--accent); text-decoration: none; }
-  .nav-days a.day-active { background: var(--accent); color: #fff; }
+  .nav-days a.day-active { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(208,80,48,0.35); }
 
   .day-sep { height: 2px; background: linear-gradient(to right, transparent, var(--surface2), transparent); margin: 1rem 0 2rem; }
+
+  /* ===== COLLAPSIBLE TIMELINE ===== */
+  .timeline-item { cursor: pointer; border-radius: 10px; padding: 0.6rem 0.6rem 0.6rem 1rem; margin-bottom: 0.5rem; transition: background 0.2s; }
+  .timeline-item:hover { background: rgba(0,0,0,0.02); }
+  .timeline-item .timeline-desc { display: none; margin-top: 0.4rem; }
+  .timeline-item.ti-open .timeline-desc { display: block; }
+  .timeline-toggle { display: inline-block; width: 20px; height: 20px; line-height: 20px; text-align: center; font-size: 0.7rem; color: var(--text-dim); transition: transform 0.2s; float: right; margin-top: 0.2rem; }
+  .ti-open .timeline-toggle { transform: rotate(180deg); }
+
+  /* ===== VISUAL TIERS ===== */
+  .timeline-item[data-tier="highlight"] { border-left: 3px solid var(--accent); background: rgba(208,80,48,0.04); }
+  .timeline-item[data-tier="highlight"] .timeline-title { color: var(--accent); font-size: 1.1rem; }
+  .timeline-item[data-tier="highlight"]::before { background: var(--accent); width: 12px; height: 12px; }
+  .timeline-item[data-tier="transit"] { opacity: 0.7; }
+  .timeline-item[data-tier="transit"]::before { background: var(--text-dim); width: 8px; height: 8px; }
+  .timeline-item[data-tier="transit"] .timeline-title { font-weight: 500; font-size: 0.95rem; }
+  .tier-badge { display: inline-block; font-size: 0.65rem; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 0.5rem; vertical-align: middle; }
+  .tier-badge-highlight { background: rgba(208,80,48,0.15); color: var(--accent); }
+  .tier-badge-transit { background: rgba(0,0,0,0.06); color: var(--text-dim); }
+
+  /* ===== DAY SUMMARY CARD ===== */
+  .day-summary { background: linear-gradient(135deg, rgba(208,80,48,0.06), rgba(42,138,156,0.06)); border-radius: 12px; padding: 1.2rem; margin-bottom: 1.5rem; border: 1px solid rgba(208,80,48,0.12); }
+  .day-summary-title { font-family: 'Baloo 2', cursive; font-size: 1rem; color: var(--accent); margin-bottom: 0.3rem; }
+  .day-summary-text { font-size: 0.9rem; color: var(--text-dim); line-height: 1.6; }
+  .day-summary-highlights { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+  .day-summary-chip { font-size: 0.78rem; padding: 0.2rem 0.6rem; border-radius: 20px; background: var(--surface); border: 1px solid rgba(0,0,0,0.08); color: var(--text); font-weight: 600; }
+
+  /* ===== COLLAPSIBLE DAY SECTIONS ===== */
+  .day-section-toggle { display: flex; align-items: center; justify-content: space-between; padding: 0.8rem 1rem; margin: 0.8rem 0 0; background: var(--surface2); border-radius: 10px; cursor: pointer; transition: background 0.2s; }
+  .day-section-toggle:hover { background: rgba(208,80,48,0.08); }
+  .day-section-toggle h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin: 0; }
+  .day-section-toggle .dst-arrow { font-size: 0.7rem; color: var(--text-dim); transition: transform 0.2s; }
+  .day-section-toggle.dst-open .dst-arrow { transform: rotate(180deg); }
+  .day-section-content { display: none; }
+  .day-section-toggle.dst-open + .day-section-content { display: block; }
+
+  /* ===== SWIPE HINT ===== */
+  .swipe-hint { text-align: center; padding: 0.8rem; font-size: 0.8rem; color: var(--text-dim); opacity: 0.6; }
+  .swipe-hint-arrow { display: inline-block; animation: swipeHint 1.5s ease-in-out infinite; }
+  @keyframes swipeHint { 0%,100% { transform: translateX(0); } 50% { transform: translateX(8px); } }
 
   .day-nav { display: none; }
 
@@ -3419,6 +3460,215 @@
     });
   }, { threshold: 0.1 });
   observer.observe(mapEl);
+})();
+
+// ==================== V3 UX IMPROVEMENTS ====================
+(function() {
+  // --- 1. COLLAPSIBLE TIMELINE ---
+  var allTimelineItems = document.querySelectorAll('.timeline-item');
+  allTimelineItems.forEach(function(item) {
+    var toggle = document.createElement('span');
+    toggle.className = 'timeline-toggle';
+    toggle.textContent = '▼';
+    var titleEl = item.querySelector('.timeline-title');
+    if (titleEl) titleEl.appendChild(toggle);
+
+    item.addEventListener('click', function(e) {
+      if (e.target.closest('a')) return;
+      item.classList.toggle('ti-open');
+    });
+  });
+
+  // --- 2. VISUAL TIERS (auto-classify) ---
+  var highlightWords = ['braies','seceda','ciampedie','forest park','acquafun','dòlaondes','vodeni park','osttirodler','fun bob','mar dolomit','affenberg','mondolatte','lago di carezza','lago di caldaro','lago di molveno','alpe di siusi'];
+  var transitWords = ['polazak','dolazak','vinjeta','tunel','cestarina','gorivo','tank','preseljenje','povratak','ciao','vožnja','nabavka','pakiranje','check-in','check-out','austrijska vinjeta','spuštanje'];
+
+  allTimelineItems.forEach(function(item) {
+    var title = (item.querySelector('.timeline-title') || {}).textContent || '';
+    var desc = (item.querySelector('.timeline-desc') || {}).textContent || '';
+    var combined = (title + ' ' + desc).toLowerCase();
+
+    var isHighlight = highlightWords.some(function(w) { return combined.indexOf(w) >= 0; });
+    var isTransit = transitWords.some(function(w) { return combined.indexOf(w) >= 0; });
+
+    if (isHighlight && !isTransit) {
+      item.setAttribute('data-tier', 'highlight');
+      item.classList.add('ti-open');
+    } else if (isTransit && !isHighlight) {
+      item.setAttribute('data-tier', 'transit');
+    }
+  });
+
+  // --- 3. AUTO-HIDE NAV ON SCROLL ---
+  var nav = document.getElementById('main-nav');
+  var lastScrollY = 0;
+  var navHidden = false;
+  var scrollThreshold = 10;
+
+  window.addEventListener('scroll', function() {
+    var currentY = window.scrollY;
+    if (currentY < 100) {
+      if (navHidden) { nav.classList.remove('nav-hidden'); navHidden = false; }
+      lastScrollY = currentY;
+      return;
+    }
+    if (currentY - lastScrollY > scrollThreshold && !navHidden) {
+      nav.classList.add('nav-hidden');
+      navHidden = true;
+    } else if (lastScrollY - currentY > scrollThreshold && navHidden) {
+      nav.classList.remove('nav-hidden');
+      navHidden = false;
+    }
+    lastScrollY = currentY;
+  });
+
+  // --- 4. DAY SUMMARY CARDS (auto-generate) ---
+  var daySections = document.querySelectorAll('section[id^="dan"]');
+  daySections.forEach(function(sec) {
+    var dayBody = sec.querySelector('.day-body');
+    if (!dayBody) return;
+
+    var theme = sec.querySelector('.day-theme');
+    var location = sec.querySelector('.day-location');
+    var dayType = sec.querySelector('.day-type');
+
+    var highlights = [];
+    var items = sec.querySelectorAll('.timeline-item[data-tier="highlight"]');
+    items.forEach(function(it) {
+      var t = it.querySelector('.timeline-title');
+      if (t) {
+        var text = t.textContent.replace(/\s*▼\s*$/, '').trim();
+        if (text.length < 40) highlights.push(text);
+      }
+    });
+    if (highlights.length === 0) {
+      var allItems = sec.querySelectorAll('.timeline-title');
+      if (allItems.length > 2) {
+        var mid = allItems[Math.floor(allItems.length / 2)];
+        highlights.push(mid.textContent.replace(/\s*▼\s*$/, '').trim());
+      }
+    }
+
+    var summary = document.createElement('div');
+    summary.className = 'day-summary';
+    var html = '<div class="day-summary-title">Ukratko</div>';
+    html += '<div class="day-summary-text">';
+    if (theme) html += theme.textContent + '. ';
+    if (location) html += location.textContent + '.';
+    html += '</div>';
+    if (highlights.length > 0) {
+      html += '<div class="day-summary-highlights">';
+      highlights.slice(0, 4).forEach(function(h) {
+        html += '<span class="day-summary-chip">' + h + '</span>';
+      });
+      html += '</div>';
+    }
+    summary.innerHTML = html;
+
+    var firstChild = dayBody.firstChild;
+    dayBody.insertBefore(summary, firstChild);
+  });
+
+  // --- 4b. COLLAPSE DAY SUB-SECTIONS ---
+  var sectionMap = [
+    { selector: '.info-grid', label: 'Djeca & Alternative' },
+    { selector: '.daily-budget', label: 'Dnevni proračun' },
+    { selector: '.camp-card', label: 'Info o kampu' },
+    { selector: '.day-enrich', label: 'Zanimljivosti' }
+  ];
+  document.querySelectorAll('section[id^="dan"]').forEach(function(sec) {
+    sectionMap.forEach(function(sm) {
+      var els = sec.querySelectorAll(sm.selector);
+      els.forEach(function(el) {
+        var toggle = document.createElement('div');
+        toggle.className = 'day-section-toggle';
+        toggle.innerHTML = '<h4>' + sm.label + '</h4><span class="dst-arrow">▼</span>';
+        var wrapper = document.createElement('div');
+        wrapper.className = 'day-section-content';
+        el.parentNode.insertBefore(toggle, el);
+        el.parentNode.insertBefore(wrapper, el);
+        wrapper.appendChild(el);
+        toggle.addEventListener('click', function() {
+          toggle.classList.toggle('dst-open');
+        });
+      });
+    });
+  });
+
+  // --- 5. SWIPE BETWEEN DAYS ---
+  var days = [];
+  for (var i = 1; i <= 14; i++) days.push('dan' + i);
+  var touchStartX = 0;
+  var touchStartY = 0;
+  var touchStartTime = 0;
+
+  document.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+  }, { passive: true });
+
+  document.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
+    var dt = Date.now() - touchStartTime;
+    if (Math.abs(dx) < 80 || Math.abs(dy) > Math.abs(dx) * 0.7 || dt > 400) return;
+
+    var navEl = document.getElementById('main-nav');
+    var navH = navEl ? navEl.offsetHeight + 30 : 120;
+    var currentDay = null;
+    for (var j = days.length - 1; j >= 0; j--) {
+      var el = document.getElementById(days[j]);
+      if (el && el.getBoundingClientRect().top <= navH) { currentDay = days[j]; break; }
+    }
+    if (!currentDay) return;
+
+    var idx = days.indexOf(currentDay);
+    var targetIdx = dx < 0 ? idx + 1 : idx - 1;
+    if (targetIdx < 0 || targetIdx >= days.length) return;
+
+    var targetId = days[targetIdx];
+    history.pushState(null, null, '#' + targetId);
+
+    var targetEl = document.getElementById(targetId);
+    if (targetEl) {
+      var top = targetEl.getBoundingClientRect().top + window.scrollY - (navEl ? navEl.offsetHeight : 80) - 8;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+
+    var navDays = document.getElementById('nav-days');
+    if (navDays) {
+      var dayLinks = navDays.querySelectorAll('a[data-day]');
+      dayLinks.forEach(function(a) {
+        a.classList.toggle('day-active', a.getAttribute('data-day') === targetId);
+      });
+      var activeLink = navDays.querySelector('.day-active');
+      if (activeLink) activeLink.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+    }
+  }, { passive: true });
+
+  // --- 6. FIX DAY PILLS SCROLL (show day 1 on entry) ---
+  var origShowPage = window._v3ShowPagePatched;
+  var navDaysEl = document.getElementById('nav-days');
+  if (navDaysEl) {
+    var mo = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.type === 'attributes' && m.attributeName === 'class') {
+          if (navDaysEl.classList.contains('nav-days-visible')) {
+            setTimeout(function() {
+              var activeLink = navDaysEl.querySelector('.day-active');
+              if (activeLink) {
+                activeLink.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+              } else {
+                navDaysEl.scrollLeft = 0;
+              }
+            }, 50);
+          }
+        }
+      });
+    });
+    mo.observe(navDaysEl, { attributes: true });
+  }
 })();
 </script>
 
